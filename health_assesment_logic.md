@@ -1,48 +1,78 @@
-### 🏥 Health Status Determination
-        
-        The **Overall Score** (0-100) is calculated using weighted components:
-        
-        #### 📊 Score Components:
-        - **Inclination Score (35%)**: Deviation from target inclination
-          - Penalty for deviation from target
-          - Additional penalty for unstable inclination (high std deviation)
-        
-        - **Maintenance Score (25%)**: **🆕 Dynamic Pattern-Based Assessment**
-          - **Individual Learning**: Each satellite's maneuver pattern is analyzed from historical data
-          - **Pattern Detection**: Calculates median interval between maneuvers (e.g., 30 days, 60 days, etc.)
-          - **Adaptive Scoring**: 
-            - ✅ **On Schedule**: Last maneuver within expected window → Score: 100
-            - ⏱️ **Due Soon**: Approaching next window (1.0-1.5x interval) → Score: 90
-            - ⚠️ **Overdue**: Beyond 1.5x expected interval → Score: 60
-            - 🔴 **Critical**: Beyond 2x expected interval → Score: 30
-            - 💀 **Severe**: Beyond 3x expected interval → Score: 0
-          - **Confidence Weighting**: Score adjusted based on pattern consistency
-        
-        - **Drift Score (25%)**: Longitudinal drift analysis
-          - GSO satellites: Should maintain minimal drift (<0.05°/day)
-          - IGSO satellites: Higher drift tolerance (up to 2°/day normal)
-          - Penalties for unstable drift patterns
-        
-        - **Uniformity Score (15%)**: Maneuver spacing regularity
-          - Regular spacing → Better planning and control
-          - Irregular spacing → Reactive corrections
-        
-        #### 🎯 Health Status Thresholds:
-        - **🟢 Healthy**: Score ≥ 80
-        - **🟡 Fair**: Score 60-79
-        - **🟠 Degraded**: Score 40-59
-        - **🔴 Critical**: Score < 40
-        
-        #### 🔍 Dynamic Pattern Analysis Features:
-        - **No Hard-Coded Intervals**: Each satellite defines its own correction cadence
-        - **Pattern Confidence**: High/Medium/Low based on consistency of historical intervals
-        - **Predictive Alerts**: Estimates when next maneuver is expected
-        - **Overdue Detection**: Flags satellites missing their expected correction window
-        - **Adaptive to Changes**: Automatically adjusts to new operational patterns
-        
-        #### 📈 Additional Factors:
-        - Drift trend analysis (increasing/decreasing)
-        - Altitude monitoring (graveyard orbit detection)
-        - Maneuver type distribution (EW vs NS)
-        - Orbital stability metrics
-        """
+# 🏥 Health Status Determination
+
+The **Overall Score (0–100)** is calculated using weighted components.
+
+## 📊 Score Components
+
+### **1. Inclination Score (35%)**
+Measures how well the satellite maintains its target inclination.
+
+- Penalty for deviation from target  
+- Additional penalty for unstable inclination (high standard deviation)
+
+---
+
+### **2. Maintenance Score (25%) — 🆕 Dynamic Pattern-Based Assessment**
+Uses historical maneuver data to estimate expected correction intervals.
+
+#### ✅ Key Features
+- **Individual Learning**: Each satellite’s maneuver pattern is learned from historical intervals.  
+- **Pattern Detection**: Detects typical maneuver spacing (e.g., 30 days, 60 days).  
+
+#### **Adaptive Scoring**
+| Condition | Meaning | Score |
+|----------|----------|--------|
+| ✅ **On Schedule** | Last maneuver within expected window | **100** |
+| ⏱️ **Due Soon** | 1.0–1.5× expected interval | **90** |
+| ⚠️ **Overdue** | >1.5× expected interval | **60** |
+| 🔴 **Critical** | >2× expected interval | **30** |
+| 💀 **Severe** | >3× expected interval | **0** |
+
+- **Confidence Weighting**: Score scaled based on pattern consistency.
+
+---
+
+### **3. Drift Score (25%)**
+Analyzes longitudinal drift.
+
+- **GSO satellites**: Maintain minimal drift (< **0.05°/day**)  
+- **IGSO satellites**: Higher tolerance (up to **2°/day**)  
+- Penalties for unstable or increasing drift
+
+---
+
+### **4. Uniformity Score (15%)**
+Evaluates regularity of maneuver spacing.
+
+- Regular spacing → Planned station-keeping  
+- Irregular spacing → Reactive corrections  
+
+---
+
+## 🎯 Health Status Thresholds
+
+| Status | Score Range |
+|--------|--------------|
+| 🟢 **Healthy** | ≥ 80 |
+| 🟡 **Fair** | 60–79 |
+| 🟠 **Degraded** | 40–59 |
+| 🔴 **Critical** | < 40 |
+
+---
+
+## 🔍 Dynamic Pattern Analysis (Detailed)
+
+- **No Hard-Coded Intervals**: Each satellite defines its own cadence.  
+- **Pattern Confidence**: High / Medium / Low based on interval variance.  
+- **Predictive Alerts**: Forecasts next expected maneuver.  
+- **Overdue Detection**: Flags missed correction windows.  
+- **Adaptive Behavior**: Adjusts automatically if patterns change.
+
+---
+
+## 📈 Additional Factors
+
+- Drift trend (increasing, decreasing, stable)  
+- Altitude monitoring (graveyard orbit detection)  
+- Maneuver type distribution (EW vs NS)  
+- Orbital stability metrics  
