@@ -76,3 +76,23 @@ Evaluates regularity of maneuver spacing.
 - Altitude monitoring (graveyard orbit detection)  
 - Maneuver type distribution (EW vs NS)  
 - Orbital stability metrics  
+
+---
+
+## 📐 Position Error Derivation
+
+To make the impact of what we are seeing here more clear we can derive the following:
+
+**Position Error = PDOP × UERE**
+
+where:
+- **PDOP** is the Positional Dilution of Precision (in all 3 axes), and
+- **UERE** is the User Equivalent Range Error (we can take the NavIC design target of 6m as per [V.G. Rao et al](https://www.ion.org/publications/abstract.cfm?articleID=9566))
+
+So for the range of PDOP values mentioned above, we have the following (for the month of October 2025):
+
+**32.70m < Position Error < 494.52m**
+
+*(Calculated as: Min = 5.45 × 6m = 32.70m, Max = 82.42 × 6m = 494.52m)*
+
+
